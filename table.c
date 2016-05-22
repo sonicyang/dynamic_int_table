@@ -37,6 +37,7 @@ void int_table_insert(struct int_table_t* int_table, int x){
     if(int_table->size == 0){
         int_table->data = malloc(sizeof(int));
         int_table->used = malloc(sizeof(int));
+        memset(int_table->used, 0, sizeof(int));
         int_table->size = 1;
     }
     if(int_table->num == int_table->size){
@@ -48,6 +49,9 @@ void int_table_insert(struct int_table_t* int_table, int x){
         memset(int_table->used, 0, sizeof(int) * int_table->size * 2);
         memcpy(int_table->data, ptr, sizeof(int) * int_table->size);
         memcpy(int_table->used, ptr2, sizeof(int) * int_table->size);
+
+        free(ptr);
+        free(ptr2);
 
         int_table->size = int_table->size * 2;
     }
@@ -74,8 +78,8 @@ void int_table_delete(struct int_table_t* int_table, int x){
     if(x < 0 || x > int_table->size - 1)
         return;
 
-    int_table->data[i] = 0;
-    int_table->used[i] = 0;
+    int_table->data[x] = 0;
+    int_table->used[x] = 0;
     int_table->num--;
 
     if(4 * int_table->num == int_table->size){
@@ -84,7 +88,7 @@ void int_table_delete(struct int_table_t* int_table, int x){
 
         int_table->data = malloc(sizeof(int) * int_table->size / 2);
         int_table->used = malloc(sizeof(int) * int_table->size / 2);
-        memset(int_table->used, 0, sizeof(int) * int_table->size * 2);
+        memset(int_table->used, 0, sizeof(int) * int_table->size / 2);
 
         k = 0;
         for(i = 0; i < int_table->size; i++){
@@ -93,6 +97,9 @@ void int_table_delete(struct int_table_t* int_table, int x){
                 int_table->used[k++] = ptr2[i];
             }
         }
+
+        free(ptr);
+        free(ptr2);
 
         int_table->size = int_table->size / 2;
     }
