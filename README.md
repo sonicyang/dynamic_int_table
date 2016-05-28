@@ -24,7 +24,7 @@ You must first declare and create a table
 
 `struct int_table_t* table = create_int_table()`
 
-Then you can insert a integer x
+Then you can insert a integer x. This will return the index of the element.
 
 `int_table_insert(table, x)`
 
@@ -32,9 +32,9 @@ Or you can remove a element by index i
 
 `int_table_delete(table, i)`
 
-To access the data array
+To access the data array with index
 
-`table->data`
+`table->data[index]`
 
 if a valid data is present in the ith slot
 
