@@ -2,7 +2,7 @@ Dynamic Table
 =============
 
 This is an implementation of dynamic table of integer type.
-The table will grow 2x up on size limit reached, and will contract 1/2x upon element only occupy 1/4 of its size.
+The table will grow 2x up on size limit reached, and will retract 1/2x upon element only occupy 1/4 of its size.
 
 Usage
 -----
